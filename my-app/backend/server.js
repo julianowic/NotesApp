@@ -16,6 +16,12 @@ mongoose.connect(uri)
 const connection = mongoose.connection
 connection.once('open', () =>{console.log("MongoDB database connection established successfully!")} )
 
+const notesRouter = require("./routes/notes")
+const categoriesRouter = require("./routes/categories")
+
+app.use('/notes', notesRouter)
+app.use('/categories', categoriesRouter)
+
 app.listen(port, ()=>{
     console.log(`Server is running on port: ${port}`)
 })
