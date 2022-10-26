@@ -5,18 +5,36 @@ function Category(props){
     const [category, setCategory] = useState('')
 
     function handleChange(e){
+        const { name, value } = e.target;
 
+        setCategory(prevCategory => {
+          return {
+            ...prevCategory,
+            [name]: value
+          };
+        });
     }
 
     function submitCategory(e){
+        e.preventDefault();
 
+        axios
+        .post("http://localhost:5000/categories/add-category", category)
+        .then((res) => {
+          setCategory('')
+          console.log("Category added successfully");
+        })
+        .catch((err) => {
+          console.log("Error couldn't create TODO");
+          console.log(err.message);
+        });
     }
 
     return(   
     <form>
-    <label for="fname">Category:</label>
+    <label>Category:</label>
     <input type="text" id="category" name="category" value={category.category} onChange={handleChange}/>
-    <input type="submit" value="Submit"/>
+    <button onClick={submitCategory}>Add</button>
     </form>
      
           )
