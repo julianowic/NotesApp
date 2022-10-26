@@ -13,9 +13,9 @@ router.route('/add-note').post((req, res) => {
     const content = req.body.content
     
     const newNote = new Note({
-        category,
         title,
         content,
+        category,
     })
     
     newNote.save()
@@ -25,7 +25,7 @@ router.route('/add-note').post((req, res) => {
 
 router.route('/:id').delete((req, res) => {
     Note.findByIdAndDelete(req.params.id)
-    .then(notes => res.json('Exercise deleted!'))
+    .then(() => res.json('Exercise deleted!'))
     .catch(err => res.status(err).json('Error ' + err))
 })
 

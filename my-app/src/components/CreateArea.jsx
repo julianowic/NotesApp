@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+import Header from "./Header";
+import Footer from "./Footer";
+import axios from "axios"
 
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
 
   const [note, setNote] = useState({
     title: "",
-    content: ""
+    content: "",
+    category: 'test'
   });
 
   function handleChange(event) {
@@ -20,10 +24,13 @@ function CreateArea(props) {
   }
 
   function submitNote(event) {
+    event.preventDefault();
     props.onAdd(note);
+
     setNote({
       title: "",
-      content: ""
+      content: "",
+      category: 'test'
     });
     event.preventDefault();
   }
@@ -34,6 +41,7 @@ function CreateArea(props) {
 
   return (
     <div>
+    <Header/>
       <form className="create-note">
         {isExpanded && (
           <input
@@ -54,6 +62,7 @@ function CreateArea(props) {
         />
         <button onClick={submitNote}>Add</button>
       </form>
+      <Footer/>
     </div>
   );
 }
