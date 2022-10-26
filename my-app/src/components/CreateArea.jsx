@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import Category from "./Category";
 import axios from "axios"
 
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
+  const [categories, setCategories] = useState([])
 
   const [note, setNote] = useState({
     title: "",
     content: "",
     category: 'test'
   });
+
+  useEffect(() => {
+    fetch('http://localhost:5000/categories')
+    .then(res => res.json())
+    .then(json => setCategories(json))
+  }, [])
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -42,6 +50,7 @@ function CreateArea(props) {
   return (
     <div>
     <Header/>
+    <Category/>
       <form className="create-note">
         {isExpanded && (
           <input
@@ -60,7 +69,18 @@ function CreateArea(props) {
           placeholder="Take a note..."
           rows={isExpanded ? 3 : 1}
         />
+        <select>
+        {
+          categories.map((cItem, index) => {
+        return (
+          <option value={note.category} name="category">{cItem.category}</option>
+        );
+      })}
+        </select>
+        
+
         <button onClick={submitNote}>Add</button>
+
       </form>
       <Footer/>
     </div>

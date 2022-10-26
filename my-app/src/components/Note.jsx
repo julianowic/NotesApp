@@ -12,6 +12,7 @@ function Note(props) {
       <button onClick={handleClick}>
         Delete
       </button>
+      <p>{props.category}</p>
     </div>
   );
 }
