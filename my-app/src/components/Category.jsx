@@ -25,7 +25,7 @@ function Category(props){
           console.log("Category added successfully");
         })
         .catch((err) => {
-          console.log("Error couldn't create TODO");
+          console.log("Error couldn't create Category");
           console.log(err.message);
         });
     }

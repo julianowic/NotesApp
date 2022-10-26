@@ -11,7 +11,7 @@ function CreateArea(props) {
   const [note, setNote] = useState({
     title: "",
     content: "",
-    category: 'test'
+    category: ''
   });
 
   useEffect(() => {
@@ -31,16 +31,24 @@ function CreateArea(props) {
     });
   }
 
-  function submitNote(event) {
-    event.preventDefault();
-    props.onAdd(note);
+    function submitNote(e){
+      e.preventDefault();
 
-    setNote({
-      title: "",
-      content: "",
-      category: 'test'
-    });
-    event.preventDefault();
+      axios
+      .post("http://localhost:5000/notes/add-note", note)
+      .then((res) => {
+        setNote({
+          category: '',
+          title: "",
+          content: ""
+        })
+        console.log("Note added successfully");
+        console.log(note)
+      })
+      .catch((err) => {
+        console.log("Error couldn't create Note");
+        console.log(err.message);
+      });
   }
 
   function expand() {
@@ -69,16 +77,17 @@ function CreateArea(props) {
           placeholder="Take a note..."
           rows={isExpanded ? 3 : 1}
         />
-        <select>
-        {
-          categories.map((cItem, index) => {
-        return (
-          <option value={note.category} name="category">{cItem.category}</option>
-        );
-      })}
-        </select>
+          <select
+              onChange={handleChange}
+              value={note.category}>
+              {
+                categories.map(function(cat) {
+                  return <option 
+                    key={cat.category} value={note.category}>{cat.category}
+                    </option>;
+                })
+              }</select>
         
-
         <button onClick={submitNote}>Add</button>
 
       </form>

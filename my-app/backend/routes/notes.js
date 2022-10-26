@@ -8,9 +8,9 @@ router.route('/').get((req, res) => {
 })
 
 router.route('/add-note').post((req, res) => {
-    const category = req.body.category
     const title = req.body.title
     const content = req.body.content
+    const category = req.body.category
     
     const newNote = new Note({
         title,

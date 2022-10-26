@@ -20,24 +20,6 @@ function App() {
     .then(json => setCategories(json))
   }, [])
 
-  function addNote(newNote) {
-    const notodb = newNote
-
-    axios
-      .post("http://localhost:5000/notes/add-note", notodb)
-      .then((res) => {
-        console.log('Note added');
-        setNotes(prevNotes => {
-          return [...prevNotes, newNote];
-        });
-      })
-      .catch((err) => {
-        console.log("Error couldn't create TODO");
-        console.log(err.message);
-      });
-
-  }
-
   function deleteNote(id) {
     setNotes(prevNotes => {
       return prevNotes.filter((noteItem, index) => {
@@ -51,7 +33,7 @@ function App() {
     <BrowserRouter>
     <div className="container"> 
       <Routes>
-      <Route path="/" element={<CreateArea onAdd={addNote}/>} exact/>
+      <Route path="/" element={<CreateArea/>} exact/>
       {/* <Route path="/edit/:id" element={<Note/>}/>
       <Route path="/create" element={<CreateArea/>}/> */}
       {/* <Route path="/add-category" element={<Category/>}/> */}
