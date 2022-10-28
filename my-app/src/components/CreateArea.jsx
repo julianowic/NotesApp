@@ -13,11 +13,14 @@ title: "",
 content: "",
 category: ''
   });
+
 useEffect(() => {
 fetch('http://localhost:5000/categories')
     .then(res => res.json())
     .then(json => setCategories(json))
   }, [])
+
+  
 function handleChange(event) {
 const { name, value } = event.target;
 setNote(prevNote => {
@@ -27,6 +30,7 @@ return {
       };
     });
   }
+
 function submitNote(e){
       e.preventDefault();
 axios
@@ -45,9 +49,14 @@ console.log("Error couldn't create Note");
 console.log(err.message);
       });
   }
+
+
 function expand() {
 setExpanded(true);
   }
+
+
+  
 return (
 <div>
     <Header/>

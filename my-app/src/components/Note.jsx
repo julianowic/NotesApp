@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 function Note(props) {
   function handleClick() {
