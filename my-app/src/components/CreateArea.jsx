@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Category from "./Category";
+import Note from "./Note";
 import axios from "axios"
 
 function CreateArea(props) {
@@ -56,7 +57,7 @@ setExpanded(true);
   }
 
 
-  
+
 return (
 <div>
     <Header/>
@@ -92,6 +93,7 @@ key={cat.category} value={cat.value} > {cat.category} </option>;
 
         <button onClick={submitNote}>Add</button>
 </form>
+<Note/>
       <Footer/>
 </div>
   );

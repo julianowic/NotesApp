@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:5000/notes')
     .then(res => res.json())
-  .then(json => {console.log(json)
+  .then(json => {
     setNotes(json)})
   }, [])
 
@@ -21,13 +21,15 @@ function App() {
     .then(json => setCategories(json))
   }, [])
 
-  function deleteNote(id) {
-    setNotes(prevNotes => {
-      return prevNotes.filter((noteItem, index) => {
-        return index !== id;
-      });
-    });
-  }
+  // function deleteNote(id) {
+  //   axios.delete('http://localhost:5000/'+id)
+  //   .then(response => { console.log(response.data)});
+  //   // setNotes(prevNotes => {
+  //   //   return prevNotes.filter((noteItem, index) => {
+  //   //     return index !== id;
+  //   //   });
+  //   // });
+  // }
 
   return (
     <div>
@@ -41,18 +43,6 @@ function App() {
       </Routes>
     </div>
     </BrowserRouter>
-      {notes.map((noteItem, index) => {
-        return (
-          <Note
-            key={index}
-            id={index}
-            title={noteItem.title}
-            content={noteItem.content}
-            category={noteItem.category}
-            onDelete={deleteNote}
-          />
-        );
-      })}
     </div>
   );
 }
