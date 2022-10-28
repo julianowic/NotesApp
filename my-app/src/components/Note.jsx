@@ -15,6 +15,6 @@ function Note(props) {
       <p>{props.category}</p>
     </div>
   );
-}
-
-export default Note;
+  }
+  
+  export default Note
