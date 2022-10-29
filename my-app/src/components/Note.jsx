@@ -1,15 +1,16 @@
 import React, {useState,useEffect} from "react";
 import axios from "axios";
+import CreateArea from "./CreateArea";
 
 function Note(props) {
   const [notes, setNotes] = useState([])
 
-  useEffect(() => {
-    fetch('http://localhost:5000/notes')
-    .then(res => res.json())
-  .then(json => {console.log(json)
-    setNotes(json)})
-  }, [])
+  // useEffect(() => {
+  //   fetch('http://localhost:5000/notes')
+  //   .then(res => res.json())
+  // .then(json => {console.log(json)
+  //   setNotes(json)})
+  // }, [])
 
   function deleteNote(id) {
     axios.delete(`http://localhost:5000/notes/${id}`)
@@ -23,7 +24,7 @@ function Note(props) {
 
 return (
   <div>
-  {notes.map((noteItem, index) => {
+  {props.notes.map((noteItem, index) => {
     return (
         <div className="note">
        <h1>{noteItem.title}</h1>
