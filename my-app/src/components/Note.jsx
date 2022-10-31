@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function Note(props) {
@@ -9,7 +9,7 @@ function Note(props) {
     props.setFetch(true)
   });
   }
-
+ 
 return (
   <div>
   {/* pass the notes array from CreateArea as props */}
@@ -23,7 +23,6 @@ return (
        </button>
        <p>{noteItem.category}</p>
      </div>
-  
     );
   })}
   </div>

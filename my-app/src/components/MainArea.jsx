@@ -10,6 +10,7 @@ const [isExpanded, setExpanded] = useState(false);
 const [categories, setCategories] = useState([])
 const [notes, setNotes] = useState([])
 const [fetchB, setFetch] = useState(true)
+const [filterOn, setFilter] = useState(false)
 
 const [note, setNote] = useState({
   title: "",
@@ -72,12 +73,22 @@ function submitNote(e){
     setExpanded(true);
       }
 
+    function filterNotes(category){
+        console.log(category)
+        console.log(filterOn)
+        setNotes(prevNotes => {
+            return prevNotes.filter((noteItem) => {
+              return noteItem.category === category;
+            });
+          });
+    }
 
+    
 
       return (
       <div>
           <Header/>
-          <ListCategories categories={categories}/>
+          <ListCategories categories={categories} notes={notes} filterNotes={filterNotes} setFilter={setFilter}/>
             <form className="create-note">
       {isExpanded && (
                 <input
@@ -112,6 +123,7 @@ function submitNote(e){
 
       <Note notes={notes} setFetch={setFetch}/>
             <Footer/>
+            <button onClick={()=>{setFetch(true)}}>All</button>
       </div>
         );
       }
