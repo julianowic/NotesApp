@@ -9,6 +9,7 @@ function CreateArea(props) {
 const [isExpanded, setExpanded] = useState(false);
 const [categories, setCategories] = useState([])
 const [notes, setNotes] = useState([])
+const [fetchB, setFetch] = useState(true)
 
 const [note, setNote] = useState({
   title: "",
@@ -22,7 +23,6 @@ useEffect(() => {
   .then(json => setCategories(json))
 }, [])
 
-const [fetchB, setFetch] = useState(true)
 
 useEffect(() => {
   if(fetchB) {
@@ -110,7 +110,7 @@ function submitNote(e){
               <button onClick={submitNote}>Add</button>
       </form>
 
-      <Note notes={notes}/>
+      <Note notes={notes} setFetch={setFetch}/>
             <Footer/>
       </div>
         );

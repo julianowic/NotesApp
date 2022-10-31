@@ -2,23 +2,12 @@ import React, {useState,useEffect} from "react";
 import axios from "axios";
 
 function Note(props) {
-  const [notes, setNotes] = useState([])
 
-  // useEffect(() => {
-  //   fetch('http://localhost:5000/notes')
-  //   .then(res => res.json())
-  // .then(json => {console.log(json)
-  //   setNotes(json)})
-  // }, [])
-
-  function deleteNote(id) {
+ function deleteNote(id) {
     axios.delete(`http://localhost:5000/notes/${id}`)
-    .then(() => { console.log("Note successfully deleted")});
-    // // setNotes(prevNotes => {
-    // //   return prevNotes.filter((noteItem, index) => {
-    // //     return index !== id;
-    // //   });
-    // // });
+    .then(() => { console.log("Note successfully deleted")
+    props.setFetch(true)
+  });
   }
 
 return (
