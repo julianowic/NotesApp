@@ -3,9 +3,6 @@ import axios from "axios"
 import CreateCategory from "./CreateCategory";
 
 export default function ListCategories(props) {
-    const [notes, setNotes] = useState(props.notes)
-
-    console.log("Notes from ListCategories: " + notes)
 
     function handleClick(category){
         props.setFilter(true)

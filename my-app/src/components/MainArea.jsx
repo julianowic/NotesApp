@@ -74,13 +74,21 @@ function submitNote(e){
       }
 
     function filterNotes(category){
-        console.log(category)
-        console.log(filterOn)
-        setNotes(prevNotes => {
-            return prevNotes.filter((noteItem) => {
-              return noteItem.category === category;
+        if(filterOn){
+          fetch('http://localhost:5000/notes')
+          .then(res => res.json())
+          .then(json => {
+            console.log("filter notes")
+            setNotes(json)
+            setNotes(prevNotes => {
+              console.log("setNotes called with category " + category)
+              return prevNotes.filter((noteItem) => {
+                return noteItem.category === category;
+              });
             });
-          });
+            setFilter(false)
+          })
+        }   
     }
 
     
@@ -88,7 +96,7 @@ function submitNote(e){
       return (
       <div>
           <Header/>
-          <ListCategories categories={categories} notes={notes} filterNotes={filterNotes} setFilter={setFilter}/>
+          <ListCategories categories={categories} notes={notes} filterNotes={filterNotes} setFilter={setFilter} filterOn={filterOn} setFetch={setFetch}/>
             <form className="create-note">
       {isExpanded && (
                 <input
