@@ -39,7 +39,7 @@ useEffect(() => {
 
 function handleChange(event) {
 const { name, value } = event.target;
-console.log("handleChange called")
+
 setNote(prevNote => {
 return {
         ...prevNote,
@@ -74,22 +74,6 @@ function submitNote(e){
       }
 
     function filterNotes(category){
-        // if(filterOn){
-        //   fetch('http://localhost:5000/notes')
-        //   .then(res => res.json())
-        //   .then(json => {
-        //     console.log("filter notes")
-        //     setNotes(json)
-        //     setNotes(prevNotes => {
-        //       console.log("setNotes called with category " + category)
-        //       return prevNotes.filter((noteItem) => {
-        //         return noteItem.category === category;
-        //       });
-        //     });
-        //     setFilter(false)
-        //   })
-        // }   
-        setFilter(true)
         if(filterOn){
           fetch('http://localhost:5000/notes')
               .then(res => res.json())
