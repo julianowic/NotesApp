@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import Category from "./Category";
+import ListCategories from "./ListCategories";
 import Note from "./Note";
 import axios from "axios"
 
@@ -77,7 +77,7 @@ function submitNote(e){
       return (
       <div>
           <Header/>
-          <Category/>
+          <ListCategories categories={categories}/>
             <form className="create-note">
       {isExpanded && (
                 <input
@@ -109,6 +109,7 @@ function submitNote(e){
 
               <button onClick={submitNote}>Add</button>
       </form>
+
       <Note notes={notes}/>
             <Footer/>
       </div>

@@ -1,6 +1,5 @@
 import React, {useState,useEffect} from "react";
 import axios from "axios";
-import CreateArea from "./CreateArea";
 
 function Note(props) {
   const [notes, setNotes] = useState([])
@@ -24,6 +23,7 @@ function Note(props) {
 
 return (
   <div>
+  {/* pass the notes array from CreateArea as props */}
   {props.notes.map((noteItem, index) => {
     return (
         <div className="note">
