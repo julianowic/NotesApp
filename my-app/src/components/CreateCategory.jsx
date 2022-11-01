@@ -32,7 +32,7 @@ function Category(props){
 
     return(   
       
-    <form>
+    <form className="create-category">
     <label>Category:</label>
     <input type="text" id="category" name="category" value={category.category} onChange={handleChange}/>
     <button onClick={submitCategory}>Add</button>

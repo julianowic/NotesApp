@@ -44,10 +44,12 @@
     margin: 16px;
     float: left;
   }
+
   .note h1 {
     font-size: 1.1em;
     margin-bottom: 6px;
   }
+
   .note p {
     font-size: 1.1em;
     margin-bottom: 10px;
@@ -67,9 +69,15 @@
     outline: none;
   }
   
+  .notes-group{
+    position: relative;
+    margin: 5% 10%;
+  }
+
+
   form {
     position: relative;
-    width: 480px;
+    width: 30%;
     margin: 30px auto 20px auto;
     background: #fff;
     padding: 15px;
@@ -100,15 +108,35 @@
     cursor: pointer;
     outline: none;
   }
+
+  .create-category{
+    width: 100%
+  }
+
+  .categories{
+    width: 20%;
+    float: left;
+  }
+
+  .notes-container{
+    width: 80%;
+    float: right;
+  }
+
+  .all-button{
+    width: 100%
+  }
   
   .btn-group button {
     background-color: #04AA6D; /* Green background */
     border: 1px solid green; /* Green border */
     color: white; /* White text */
-    padding: 10px 24px; /* Some padding */
+    padding: 20px 24px; /* Some padding */
     cursor: pointer; /* Pointer/hand icon */
-    width: 50%; /* Set a width if needed */
+    width: 100%; /* Set a width if needed */
     display: block; /* Make the buttons appear below each other */
+    margin-top: 3%;
+    margin-bottom: 3%
   }
   
   .btn-group button:not(:last-child) {

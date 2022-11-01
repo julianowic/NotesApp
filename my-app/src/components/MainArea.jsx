@@ -2,8 +2,14 @@ import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import ListCategories from "./ListCategories";
+import CreateCategory from "./CreateCategory";
 import Note from "./Note";
 import axios from "axios"
+
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 function CreateArea(props) {
 const [isExpanded, setExpanded] = useState(false);
@@ -90,8 +96,17 @@ function submitNote(e){
       return (
       <div>
           <Header/>
-          <ListCategories categories={categories} notes={notes} filterNotes={filterNotes} setFilter={setFilter} filterOn={filterOn} setFetch={setFetch}/>
-            <form className="create-note">
+            
+
+
+      <div className="categories">
+      <CreateCategory/>
+      <button className="all-button" onClick={()=>{setFetch(true)}}>All</button>
+      <ListCategories categories={categories} notes={notes} filterNotes={filterNotes} setFilter={setFilter} filterOn={filterOn} setFetch={setFetch}/>
+      </div>
+
+      <div className="notes-container">
+      <form className="create-note">
       {isExpanded && (
                 <input
       name="title"
@@ -122,10 +137,12 @@ function submitNote(e){
 
               <button onClick={submitNote}>Add</button>
       </form>
-
+      <div className="notes-group">
       <Note notes={notes} setFetch={setFetch}/>
+      </div>
+      </div>
             <Footer/>
-            <button onClick={()=>{setFetch(true)}}>All</button>
+            
       </div>
         );
       }
