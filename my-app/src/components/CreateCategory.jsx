@@ -23,6 +23,7 @@ function Category(props){
         .then((res) => {
           setCategory('')
           console.log("Category added successfully");
+          props.setFetchCategories(true)
         })
         .catch((err) => {
           console.log("Error couldn't create Category");

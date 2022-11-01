@@ -5,8 +5,6 @@ import ListCategories from "./ListCategories";
 import CreateCategory from "./CreateCategory";
 import Note from "./Note";
 import axios from "axios"
-
-
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -16,7 +14,7 @@ const [isExpanded, setExpanded] = useState(false);
 const [categories, setCategories] = useState([])
 const [notes, setNotes] = useState([])
 const [fetchB, setFetch] = useState(true)
-const [filterOn, setFilter] = useState(false)
+const [fetchCategories, setFetchCategories] = useState(true)
 
 const [note, setNote] = useState({
   title: "",
@@ -25,10 +23,15 @@ const [note, setNote] = useState({
     });
 
 useEffect(() => {
+  if(fetchCategories){
   fetch('http://localhost:5000/categories')
   .then(res => res.json())
-  .then(json => setCategories(json))
-}, [])
+  .then(json => {
+    setCategories(json)
+    setFetchCategories(false)
+    })
+  }
+}, [fetchCategories])
 
 
 useEffect(() => {
@@ -80,15 +83,13 @@ function submitNote(e){
       }
 
     function filterNotes(category){
-        if(filterOn){
           fetch('http://localhost:5000/notes')
               .then(res => res.json())
               .then(json => {
                   const filtered = json.filter((noteItem) => (noteItem.category === category));
                   setNotes(filtered);
-                  setFilter(false)
             })    
-      }     
+           
     }
 
     
@@ -96,13 +97,11 @@ function submitNote(e){
       return (
       <div>
           <Header/>
-            
-
 
       <div className="categories">
-      <CreateCategory/>
+      <CreateCategory setFetchCategories={setFetchCategories}/>
       <button className="all-button" onClick={()=>{setFetch(true)}}>All</button>
-      <ListCategories categories={categories} notes={notes} filterNotes={filterNotes} setFilter={setFilter} filterOn={filterOn} setFetch={setFetch}/>
+      <ListCategories categories={categories} notes={notes} filterNotes={filterNotes} setFetch={setFetch}/>
       </div>
 
       <div className="notes-container">
@@ -134,8 +133,7 @@ function submitNote(e){
                       })
       }
       </select>
-
-              <button onClick={submitNote}>Add</button>
+            <button onClick={submitNote}>Add</button>
       </form>
       <div className="notes-group">
       <Note notes={notes} setFetch={setFetch}/>

@@ -3,7 +3,6 @@ import axios from "axios"
 
 
 export default function ListCategories(props) {
-    props.setFilter(true)
 
     function handleClick(category){
         props.filterNotes(category)
