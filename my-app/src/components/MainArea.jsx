@@ -9,7 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-function CreateArea(props) {
+function CreateArea() {
 const [isExpanded, setExpanded] = useState(false);
 const [categories, setCategories] = useState([])
 const [notes, setNotes] = useState([])
@@ -91,8 +91,6 @@ function submitNote(e){
             })    
            
     }
-
-    
 
       return (
       <div>
