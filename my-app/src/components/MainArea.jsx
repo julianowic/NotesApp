@@ -89,7 +89,6 @@ function submitNote(e){
                   const filtered = json.filter((noteItem) => (noteItem.category === category));
                   setNotes(filtered);
             })    
-           
     }
 
       return (
@@ -134,7 +133,7 @@ function submitNote(e){
             <button onClick={submitNote}>Add</button>
       </form>
       <div className="notes-group">
-      <Note notes={notes} setFetch={setFetch}/>
+      <Note notes={notes} setFetch={setFetch} setNotes={setNotes} categories={categories}/>
       </div>
       </div>
             <Footer/>

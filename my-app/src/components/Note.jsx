@@ -1,11 +1,17 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, useRef} from "react";
 import axios from "axios";
+import EditNote from './EditNote'
 
 
 function Note(props) {
-
-  const [isEdit, setEdit] = useState(false)
   const [idToEdit, setIdToEdit] = useState('')
+  const [buttonPopup, setButtonPopup] = useState(false); 
+  const [noteToEdit, setNoteToEdit] = useState({
+    title: "", 
+    content: "",
+    category: ""
+  })
+
 
  function deleteNote(id) {
     axios.delete(`http://localhost:5000/notes/${id}`)
@@ -14,12 +20,21 @@ function Note(props) {
   });
   }
 
-  function editNote(id){
-    console.log("note to edit: " + id)
-    setEdit(true)
-    setIdToEdit(id)
-  }
-
+  function changeNotes(id, title, content, category){
+        setButtonPopup(true)
+        setNoteToEdit(prevNote => {
+          return {
+                  ...prevNote,
+                  title : title, 
+                  content : content,
+                  category : category
+                };
+              });
+        
+        console.log(noteToEdit)
+        setIdToEdit(id)
+        console.log(idToEdit)
+    }
  
 return (
 
@@ -30,7 +45,7 @@ return (
         <div className="note">
        <h1>{noteItem.title}</h1>
        <p>{noteItem.content}</p>
-       <button onClick={() => {editNote(noteItem._id)}}>
+       <button onClick={() => {changeNotes(noteItem._id, noteItem.content, noteItem.title, noteItem.category)}}>
          Edit
        </button>
        <button onClick={() => {deleteNote(noteItem._id)}}>
@@ -40,6 +55,9 @@ return (
      </div>
     );
   })}
+
+  <EditNote trigger={buttonPopup} setButtonPopup={setButtonPopup} categories={props.categories} id={idToEdit} noteToEdit={noteToEdit} setFetch={props.setFetch}>
+  </EditNote>
   </div>
     )
   }
