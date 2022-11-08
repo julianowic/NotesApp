@@ -7,16 +7,19 @@ export default function EditNote(props){
         content: props.noteToEdit.content
       });
 
+      console.log("title: " + props.noteToEdit.title)
+      console.log("content: " + props.noteToEdit.content)
+
+    console.log(props.noteToEdit)
+
     function handleChange(event) {
         event.preventDefault();
-        console.log("handleChange called")
         const {name, value} = event.target;
         setNote({...note, [name]: value});
         console.log(note)
     }
     
     const updateNote = (event) => {
-        console.log(props.noteToEdit)
         event.preventDefault();
         if (!note.title || !note.content) {
             alert("'Title' or 'Content' cannot be blank");
