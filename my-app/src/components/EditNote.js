@@ -7,16 +7,10 @@ export default function EditNote(props){
         content: props.noteToEdit.content
       });
 
-      console.log("title: " + props.noteToEdit.title)
-      console.log("content: " + props.noteToEdit.content)
-
-    console.log(props.noteToEdit)
-
     function handleChange(event) {
         event.preventDefault();
         const {name, value} = event.target;
         setNote({...note, [name]: value});
-        console.log(note)
     }
     
     const updateNote = (event) => {
@@ -63,8 +57,8 @@ export default function EditNote(props){
       }
       </select>
       <div className="btn-update-note">
-            <button className="btn-update" onClick={updateNote}>Save</button>
-            <button className="btn-update" onClick={() => props.setButtonPopup(false)}>Close</button>
+            <button className="btn-update" type="submit" onClick={updateNote}>Save</button>
+            <button className="btn-update" type="button" onClick={() => props.setButtonPopup(false)}>Close</button>
       </div>
       </form>
     </div> ) : '' 

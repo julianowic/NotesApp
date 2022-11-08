@@ -30,10 +30,7 @@ function Note(props) {
                   category : category
                 };
               });
-        
-        console.log(noteToEdit)
         setIdToEdit(id)
-        console.log(idToEdit)
     }
  
 return (
