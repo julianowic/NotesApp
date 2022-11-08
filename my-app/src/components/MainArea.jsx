@@ -125,7 +125,7 @@ function submitNote(e){
       value={note.category}>
       {
                       categories.map(function(cat) {
-      return <option
+      return <option 
       key={cat.category} value={cat.value} > {cat.category} </option>;
                       })
       }

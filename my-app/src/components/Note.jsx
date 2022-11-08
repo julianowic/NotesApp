@@ -39,7 +39,7 @@ return (
   {/* pass the notes array from CreateArea as props */}
   {props.notes.map((noteItem) => {
     return (
-        <div className="note">
+        <div className="note" key={noteItem._id}>
        <h1>{noteItem.title}</h1>
        <p>{noteItem.content}</p>
        <button onClick={() => {changeNotes(noteItem._id, noteItem.title, noteItem.content, noteItem.category)}}>
