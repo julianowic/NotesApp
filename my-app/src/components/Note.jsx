@@ -35,7 +35,7 @@ function Note(props) {
  
 return (
 
-  <div>
+  <div className="notes-grid">
   {/* pass the notes array from CreateArea as props */}
   {props.notes.map((noteItem) => {
     return (

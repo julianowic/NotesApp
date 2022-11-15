@@ -5,9 +5,6 @@ import ListCategories from "./ListCategories";
 import CreateCategory from "./CreateCategory";
 import Note from "./Note";
 import axios from "axios"
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 function CreateArea() {
 const [isExpanded, setExpanded] = useState(false);

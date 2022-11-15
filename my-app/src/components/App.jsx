@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MainArea from "./MainArea";
 import { BrowserRouter, Routes, Route} from "react-router-dom" 
 
