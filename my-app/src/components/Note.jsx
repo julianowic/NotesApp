@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef} from "react";
 import axios from "axios";
+import Masonry from "react-masonry-css";
 import EditNote from './EditNote'
 
 
@@ -32,11 +33,22 @@ function Note(props) {
               });
         setIdToEdit(id)
     }
+
+    const breakpoints = {
+      default: 3, 
+      1100: 2, 
+      700: 1
+    }
  
 return (
 
   <div className="notes-grid">
   {/* pass the notes array from CreateArea as props */}
+  <Masonry
+  breakpointCols={breakpoints}
+  className="my-masonry-grid"
+  columnClassName="my-masonry-grid_column">
+
   {props.notes.map((noteItem) => {
     return (
         <div className="note" key={noteItem._id}>
@@ -52,6 +64,7 @@ return (
      </div>
     );
   })}
+  </Masonry>
 
   <EditNote trigger={buttonPopup} setButtonPopup={setButtonPopup} categories={props.categories} id={idToEdit} noteToEdit={noteToEdit} setFetch={props.setFetch}>
   </EditNote>
