@@ -64,6 +64,7 @@ function submitNote(e){
       content: ""
               })
       setFetch(true)
+      setExpanded(false)
       console.log("Note added successfully");
       console.log(note)
             })

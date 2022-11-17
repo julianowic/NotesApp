@@ -144,8 +144,8 @@
   }
   
   .btn-group button {
-    background-color: #04AA6D; /* Green background */
-    border: 1px solid green; /* Green border */
+    background-color: #c1ce04; /* Green background */
+    border: 1px solid rgb(133, 135, 19); /* Green border */
     color: white; /* White text */
     padding: 20px 24px; /* Some padding */
     cursor: pointer; /* Pointer/hand icon */

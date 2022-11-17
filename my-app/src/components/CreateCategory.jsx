@@ -17,7 +17,6 @@ function Category(props){
 
     function submitCategory(e){
         e.preventDefault();
-
         axios
         .post("http://localhost:5000/categories/add-category", category)
         .then((res) => {
@@ -35,7 +34,7 @@ function Category(props){
       
     <form className="create-category">
     <label>Category:</label>
-    <input type="text" id="category" name="category" value={category.category} onChange={handleChange}/>
+    <input type="text" name="category" value={category.category} onChange={handleChange}/>
     <button onClick={submitCategory}>Add</button>
     </form>
      
