@@ -2,23 +2,8 @@ const router = require('express').Router()
 const jwt = require('jsonwebtoken');
 const bcrypt = require ('bcryptjs')
 const asyncHandler = require('express-async-handler')
-let User = require('../models/user.model')
+let User = require('../models/user.model');
 
-// router.route('/').post((req, res) => {
-//     const name = req.body.title
-//     const content = req.body.content
-//     const category = req.body.category
-    
-//     const newUser = new User({
-//         name,
-//         email,
-//         password
-//     })
-    
-//     newUser.save()
-//     .then(() => res.json('User registered!'))
-//     .catch(err => res.status(err).json('Error: ' + err))
-//     })
 const registerUser = asyncHandler(async (req, res) => {
     const {name, email, password} = req.body
 
@@ -53,7 +38,8 @@ const registerUser = asyncHandler(async (req, res) => {
         res.status(201).json({
             _id: user.id,
             name: user.name,
-            email: user.email 
+            email: user.email, 
+            token: generateToken(user._id)
         })
     } else {
         res.status(400)
@@ -62,12 +48,35 @@ const registerUser = asyncHandler(async (req, res) => {
 })
 
 const loginUser = asyncHandler(async (req, res) => {
-    res.json("loginUser")
-})
+    const {email, password } = req.body
+
+    // Check for user email
+    const user = await User.findOne({email})
+  
+    if (user && (await bcrypt.compare(password, user.password))) {
+      res.status(201).json({
+        _id: user.id,
+        name: user.name,
+        email: user.email,
+        token: generateToken(user._id)
+      })
+    } else {
+      res.status(400)
+      throw new Error('Invalid credentials')
+    }
+  })
 
 const getUser = asyncHandler(async (req, res) => {
     res.json("getUser")
 })
+
+//generate JWT token
+
+const generateToken = (id) => {
+    return jwt.sign({id}, process.env.JWT_SECRET, {
+        expiresIn: '30d',
+    })
+}
 
 router.route('/').post(registerUser)
 
