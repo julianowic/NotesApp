@@ -1,7 +1,7 @@
 import React from "react";
 import MainArea from "./MainArea";
 import Login from "./Login";
-import Signup from "./Signup";
+import Register from "./Signup";
 import { BrowserRouter, Routes, Route} from "react-router-dom" 
 
 
@@ -14,7 +14,7 @@ function App() {
       <Routes>
       <Route path="/" element={<MainArea/>} exact/>
       <Route path="/login" element={<Login/>} exact/>
-      <Route path="/signup" element={<Signup/>} exact/>
+      <Route path="/register" element={<Register/>} exact/>
       </Routes>
     </div>
     </BrowserRouter>
