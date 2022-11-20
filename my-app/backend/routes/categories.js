@@ -1,5 +1,6 @@
 const router = require('express').Router()
 let Category = require('../models/category.model')
+const {protect} = require('../middleware/authMiddleware')
 
 
 router.route('/').get((req, res) => {

@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require ('bcryptjs')
 const asyncHandler = require('express-async-handler')
 let User = require('../models/user.model');
+const {protect} = require('../middleware/authMiddleware')
 
 const registerUser = asyncHandler(async (req, res) => {
     const {name, email, password} = req.body
@@ -67,7 +68,8 @@ const loginUser = asyncHandler(async (req, res) => {
   })
 
 const getUser = asyncHandler(async (req, res) => {
-    res.json("getUser")
+    const {_id, name, email} = await User.findById(req.user.id)
+    res.status(200).json({id : _id, name, email})
 })
 
 //generate JWT token
@@ -82,6 +84,6 @@ router.route('/').post(registerUser)
 
 router.route('/login').post(loginUser)
 
-router.route('/me').get(getUser)
+router.route('/me').get(protect, getUser)
 
 module.exports = router
