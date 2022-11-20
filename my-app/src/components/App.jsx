@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import Note from "./Note";
+import React from "react";
 import MainArea from "./MainArea";
 import { BrowserRouter, Routes, Route} from "react-router-dom" 
-import axios from "axios"
+
 
 function App() {
 

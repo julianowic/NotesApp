@@ -5,11 +5,8 @@ import ListCategories from "./ListCategories";
 import CreateCategory from "./CreateCategory";
 import Note from "./Note";
 import axios from "axios"
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
-function CreateArea(props) {
+function CreateArea() {
 const [isExpanded, setExpanded] = useState(false);
 const [categories, setCategories] = useState([])
 const [notes, setNotes] = useState([])
@@ -67,6 +64,7 @@ function submitNote(e){
       content: ""
               })
       setFetch(true)
+      setExpanded(false)
       console.log("Note added successfully");
       console.log(note)
             })
@@ -89,10 +87,7 @@ function submitNote(e){
                   const filtered = json.filter((noteItem) => (noteItem.category === category));
                   setNotes(filtered);
             })    
-           
     }
-
-    
 
       return (
       <div>
@@ -128,7 +123,7 @@ function submitNote(e){
       value={note.category}>
       {
                       categories.map(function(cat) {
-      return <option
+      return <option 
       key={cat.category} value={cat.value} > {cat.category} </option>;
                       })
       }
@@ -136,7 +131,7 @@ function submitNote(e){
             <button onClick={submitNote}>Add</button>
       </form>
       <div className="notes-group">
-      <Note notes={notes} setFetch={setFetch}/>
+      <Note notes={notes} setFetch={setFetch} setNotes={setNotes} categories={categories}/>
       </div>
       </div>
             <Footer/>

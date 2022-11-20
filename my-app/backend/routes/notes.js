@@ -37,11 +37,17 @@ router.route('/update/:id').post((req, res) =>{
         note.content = req.body.content
 
         note.save()
-        .then(() => res.json('Exercise updated!'))
+        .then(() => res.json('Note updated!'))
         .catch(err => res.status(400).json('Error ' + err))
     })
     .catch(err => res.status(400).json('Error ' + err)) 
 })
+
+router.route('/:id').get((req, res) => { 
+    Note.findById(req.params.id) 
+    .then(note => res.json(note))
+    .catch(err => res.status(400).json("Error " + err))
+  });
 
 module.exports = router
 

@@ -14,7 +14,7 @@ export default function ListCategories(props) {
         <div className="btn-group">
         {props.categories.map((categoryItem, index) =>{
              return(
-                <button onClick={() => {handleClick(categoryItem.category)}}>{categoryItem.category}</button>
+                <button key={categoryItem._id} onClick={() => {handleClick(categoryItem.category)}}>{categoryItem.category}</button>
         )
     })}
         </div>
