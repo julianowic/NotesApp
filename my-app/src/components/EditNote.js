@@ -1,11 +1,17 @@
 import React, { useState, useEffect} from "react";
 import axios from "axios";
+import {useAuthContext} from "../hooks/useAuthContext";
 
 export default function EditNote(props){
     const [note, setNote] = useState({
         title: props.noteToEdit.title,
         content: props.noteToEdit.content
       });
+
+      
+    const {user} = useAuthContext()
+
+    axios.defaults.headers.common = {'Authorization': `Bearer ${user.token}`} 
 
     function handleChange(event) {
         event.preventDefault();

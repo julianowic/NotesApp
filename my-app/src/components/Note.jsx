@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef} from "react";
 import axios from "axios";
 import Masonry from "react-masonry-css";
 import EditNote from './EditNote'
-
+import {useAuthContext} from '../hooks/useAuthContext'
 
 function Note(props) {
   const [idToEdit, setIdToEdit] = useState('')
@@ -13,7 +13,11 @@ function Note(props) {
     category: ""
   })
 
+  const {user} = useAuthContext()
 
+  axios.defaults.headers.common = {'Authorization': `Bearer ${user.token}`} 
+
+//add the bearer token 
  function deleteNote(id) {
     axios.delete(`http://localhost:5000/notes/${id}`)
     .then(() => { console.log("Note successfully deleted")

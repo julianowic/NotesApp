@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios"
+import {useAuthContext} from "../hooks/useAuthContext";
 
 function Category(props){
     const [category, setCategory] = useState('')
+
+    const {user} = useAuthContext()
+
+    axios.defaults.headers.common = {'Authorization': `Bearer ${user.token}`} 
 
     function handleChange(e){
         const { name, value } = e.target;
