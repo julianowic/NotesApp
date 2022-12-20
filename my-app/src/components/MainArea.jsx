@@ -128,18 +128,19 @@ function submitNote(e){
       placeholder="Take a note..."
       rows={isExpanded ? 3 : 1}
       />
-                <select
+                {isExpanded ? <div> 
+                  <select
                 name="category"
       onChange={handleChange}
       value={note.category}>
       {
                       categories.map(function(cat) {
-      return <option 
+      return <option className="option-cat"
       key={cat.category} value={cat.value} > {cat.category} </option>;
                       })
       }
       </select>
-            <button onClick={submitNote}>Add</button>
+            <button onClick={submitNote}>Add</button> </div> : ''}
       </form>
       <div className="notes-group">
       <Note notes={notes} setFetch={setFetch} setNotes={setNotes} categories={categories}/>

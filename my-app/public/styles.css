@@ -72,11 +72,6 @@
     outline: none;
 
   }
-  
-  .notes-group{
-    position: relative;
-    margin: 5% 10%;
-  }
 
   .my-masonry-grid {
     display: -webkit-box; /* Not needed if autoprefixing */
@@ -90,7 +85,6 @@
     background-clip: padding-box;
   }
 
-
   form {
     position: relative;
     width: 30%;
@@ -100,6 +94,7 @@
     border-radius: 7px;
     box-shadow: 0 1px 5px rgb(138, 137, 137);
   }
+
   form input,
   form textarea {
     width: 100%;
@@ -110,9 +105,26 @@
     font-family: inherit;
     resize: none;
   }
+
+  .create-note{
+    position: relative;
+    width: 50%;
+    margin: 30px auto 20px auto;
+    background: #fff;
+    padding: 15px;
+    border-radius: 7px;
+    box-shadow: 0 1px 5px rgb(138, 137, 137);
+  }
+
+  .create-note select{
+    position: relative;
+    margin-right: 230px;
+  }
+
   .create-note form button {
     position: absolute;
-    right: 18px;
+    right: 10px;
+    padding-left: 10px;
     bottom: -18px;
     background: #f5ba13;
     color: #fff;
