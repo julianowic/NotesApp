@@ -9,10 +9,15 @@ const registerUser = asyncHandler(async (req, res) => {
     const {name, email, password} = req.body
 
     //validate
+    console.log(name + email + password)
+    // if(!name || !email || !password) {
+    //     res.status(400)
+    //     throw new Error("Please add all fields")
+    // }
 
-    if(!name || !email || !password) {
+    if(!password) {
         res.status(400)
-        throw new Error("Please add all fields")
+        throw new Error("Please add a password")
     }
 
     const userExists = await User.findOne({email})
@@ -50,6 +55,10 @@ const registerUser = asyncHandler(async (req, res) => {
 
 const loginUser = asyncHandler(async (req, res) => {
     const {email, password } = req.body
+
+    if(!email || !password){
+        throw Error("Empty email or password")
+    }
 
     // Check for user email
     const user = await User.findOne({email})

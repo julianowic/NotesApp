@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Header from "./Header";
 import Footer from "./Footer";
 import ListCategories from "./ListCategories";
 import CreateCategory from "./CreateCategory";
 import Note from "./Note";
 import axios from "axios"
+import {useAuthContext} from "../hooks/useAuthContext";
 
 function CreateArea() {
 const [isExpanded, setExpanded] = useState(false);
@@ -13,27 +13,36 @@ const [notes, setNotes] = useState([])
 const [fetchB, setFetch] = useState(true)
 const [fetchCategories, setFetchCategories] = useState(true)
 
+const {user} = useAuthContext()
+
+axios.defaults.headers.common = {'Authorization': `Bearer ${user.token}`}
+
 const [note, setNote] = useState({
   title: "",
   content: "",
   category: ''
     });
 
+//add the bearer token to those 
 useEffect(() => {
-  if(fetchCategories){
-  fetch('http://localhost:5000/categories')
-  .then(res => res.json())
-  .then(json => {
-    setCategories(json)
-    setFetchCategories(false)
-    })
+  if(user && fetchCategories){
+      fetch('http://localhost:5000/categories', {
+        headers: { 'Authorization': `Bearer ${user.token}` }
+      })
+      .then(res => res.json())
+      .then(json => {
+        setCategories(json)
+        setFetchCategories(false)
+        })
   }
-}, [fetchCategories])
+}, [fetchCategories, user])
 
 
 useEffect(() => {
-  if(fetchB) {
-    fetch('http://localhost:5000/notes')
+  if(user && fetchB) {
+    fetch('http://localhost:5000/notes', {
+      headers: { 'Authorization': `Bearer ${user.token}` }
+    })
     .then(res => res.json())
     .then(json => {
       console.log(json)
@@ -41,7 +50,7 @@ useEffect(() => {
       setFetch(false)
     })
   }
-}, [fetchB])
+}, [fetchB, user])
 
 function handleChange(event) {
 const { name, value } = event.target;
@@ -56,6 +65,7 @@ return {
 
 function submitNote(e){
       e.preventDefault();
+
       axios.post("http://localhost:5000/notes/add-note", note)
            .then((res) => {
       setNote({
@@ -81,7 +91,9 @@ function submitNote(e){
       }
 
     function filterNotes(category){
-          fetch('http://localhost:5000/notes')
+          fetch('http://localhost:5000/notes', {
+            headers: { 'Authorization': `Bearer ${user.token}` }
+          })
               .then(res => res.json())
               .then(json => {
                   const filtered = json.filter((noteItem) => (noteItem.category === category));
@@ -91,7 +103,6 @@ function submitNote(e){
 
       return (
       <div>
-          <Header/>
 
       <div className="categories">
       <CreateCategory setFetchCategories={setFetchCategories}/>

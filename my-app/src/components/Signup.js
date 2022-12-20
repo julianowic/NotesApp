@@ -1,16 +1,18 @@
 import React from "react";
 import {useState, useEffect} from 'react'
 import {FaUser} from 'react-icons/fa'
+import { useSignup } from "../hooks/useSignup";
 
 export default function Signup(props){
     const [formData, setFormData] = useState({
         name : '',
         email : '',
-        password : '',
-        password2: ''
+        password : ''
+        // password2: ''
     })
 
-    const {name, email, password, password2} = formData
+    const {signup, error} = useSignup()
+    const {name, email, password} = formData
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -19,12 +21,17 @@ export default function Signup(props){
         }))
       }
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
+        if(error){
+            console.log("Error from submit: " + error)
+        }
+        console.log("trying to submit: ")
+        console.log(name, email, password)
+        await signup(name, email, password)
     }
 
     return <div>
-
         <section className="heading">
             <h1><FaUser/>Register</h1>
             <p>Please create an account</p>
@@ -69,17 +76,17 @@ export default function Signup(props){
                 />
             </div>
 
-            <div className="form-group">
+            {/* <div className="form-group">
                 <input 
                 className="form-control" 
-                type="password2" 
+                type="password" 
                 placeholder="Confirm password" 
                 id='password2' 
                 name='password2' 
                 value={password2} 
                 onChange={onChange}
                 />
-            </div>
+            </div> */}
 
             <div className="form-group">
                 <button type="submit" className="btn btn-block">Submit</button>

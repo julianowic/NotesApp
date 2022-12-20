@@ -1,12 +1,15 @@
 import React from "react";
 import {useState, useEffect} from 'react'
-import {FaSignInAlt} from 'react-icons/fa'
+import {FaSignInAlt} from 'react-icons/fa' 
+import {useLogin} from '../hooks/useLogin'
 
 export default function Login(props){
     const [formData, setFormData] = useState({
         email : '',
         password : ''
     })
+
+    const {login} = useLogin()
 
     const {email, password} = formData
     
@@ -17,14 +20,15 @@ export default function Login(props){
         }))
       }
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
+
+        await login(email, password)
     }
 
     return <div>
-
         <section className="heading">
-            <h1><FaSignInAlt/>Login and start taking goals!</h1>
+            <h1><FaSignInAlt/>Login and start taking notes!</h1>
         </section>
 
         <section className="formReg"> 

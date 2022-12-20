@@ -4,7 +4,7 @@ let User = require('../models/user.model')
 const {protect} = require('../middleware/authMiddleware')
 
 router.route('/').get(protect, (req, res) => {
-    Note.find({user : req.user.id})
+    Note.find({user : req.user.id}).sort({createdAt: -1})
     .then(notes => res.json(notes))
     .catch(err => res.status(err).json('Error: ' + err))
 })
